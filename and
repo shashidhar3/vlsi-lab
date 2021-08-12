@@ -1,0 +1,28 @@
+and.v: 
+module andmos (x,y,z); 
+input x,y; 
+output z; 
+wire p, q, vdd, gnd; 
+assign vdd = 1'b1; 
+assign gnd = 1'b0; 
+pmos p1 (q,vdd,x); /* pmos name(drain, source, gate)*/ 
+pmos p2 (q,vdd,y); 
+nmos n1 (q,p,x); /* nmos name(drain, source, gate)*/ 
+nmos n2 (p,gnd,y); 
+pmos p3 (z,vdd,q); 
+nmos n3 (z,gnd,q); 
+endmodule 
+
+and_tb.v: 
+module andmos1; 
+reg x1, y1; 
+wire z1; 
+andmos and1 (x1,y1,z1); 
+initial begin 
+x1 = 1'b0; y1 = 1'b0; #1 
+x1 = 1'b0; y1 = 1'b1; #1 
+x1 = 1'b1; y1 = 1'b0; #1 
+x1 = 1'b1; y1 = 1'b1; #2 
+$finish; 
+end 
+endmodule
