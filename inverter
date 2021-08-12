@@ -1,0 +1,21 @@
+invr.v: 
+module invr(x,y); 
+input x; 
+output y; 
+wire vdd, gnd; 
+assign vdd = 1'b1; 
+assign gnd = 1'b0; 
+pmos p1 (y,vdd,x); /* pmos name(drain, source, gate)*/ 
+nmos n1 (y,gnd,x); /* nmos name(drain, source, gate)*/ 
+endmodule
+invr_tb.v: 
+module invr_tb;
+reg x1; 
+wire y1; 
+invr inv1 (x1,y1); 
+initial begin 
+x1 = 1'b0; #1 
+x1 = 1'b1; #2 
+$finish;
+end 
+endmodule
